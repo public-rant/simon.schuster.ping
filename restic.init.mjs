@@ -6,4 +6,4 @@
 //
 // 91 days is ~3 months.
 
-await $`restic -r rest:http://${$.env.SUBDOMAIN}.rant.local/${$.env.CONTAINER} --password-command "pass show ${$.env.SUBDOMAIN}" init`
+await $`restic -r ${$.env.RESTIC_REPOSITORY} --password-command "pass show ${$.env.SUBDOMAIN}" init`
