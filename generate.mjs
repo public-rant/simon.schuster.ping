@@ -14,13 +14,17 @@ const environment_data = async (x) => {
   const promise = await openpgp.generateKey({
       type: 'rsa', // Type of the key
       rsaBits: 4096, // RSA key size (defaults to 4096 bits)
-      userIDs: [{ name: 'Jon Smith', email: 'jon@example.com' }], // you can pass multiple user IDs
+      userIDs: [{ name: subdomain, email: `${subdomain}@${container}.com` }], // you can pass multiple user IDs
       passphrase: passphrase || secret // protects the private key
   });
 
   const path = `${container}.env`
 
-  const data = { files: faker.image.dataUri() } // excalidraw drawing: need to render based on image dimensions
+  const fileId = crypto.SHA256(promise.publicKey).toString()
+  const data = {
+    elements: [{type: 'text', text: promise.publicKey }],
+    files: { fileId: fileId, url: faker.image.dataUri() }
+  } // excalidraw drawing: need to render based on image dimensions
 
   const ciphertext = crypto.AES.encrypt(JSON.stringify(data), secret).toString();
 
