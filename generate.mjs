@@ -8,39 +8,39 @@ const name = (n, s) => Array(n).fill(null).map(_ => faker.word.adjective(5)).joi
 
 
 const environment_data = async (x) => {
-  const project_name = name(2, "-")
-  const container_name = name(3, ".")
-  const secret = $.env.SECRET || container_name
+  const container = name(2, "-")
+  const subdomain = name(3, ".")
+  const secret = $.env.SECRET || subdomain
   const promise = await openpgp.generateKey({
       type: 'rsa', // Type of the key
       rsaBits: 4096, // RSA key size (defaults to 4096 bits)
       userIDs: [{ name: 'Jon Smith', email: 'jon@example.com' }], // you can pass multiple user IDs
-      passphrase: passphrase || container_name // protects the private key
+      passphrase: passphrase || secret // protects the private key
   });
 
-  const string = `
-    CONTAINER_NAME=${container_name}
-    PROMPT="${faker.hacker.phrase()}"
-    SECRET=${secret}
-    ICON_URI=${faker.image.dataUri()}
-    `
+  const path = `${container}.env`
 
-  const path = `${project_name}.env`
-
-  const data = { foo: 'bar' } // excalidraw drawing: need to render based on image dimensions
+  const data = { files: faker.image.dataUri() } // excalidraw drawing: need to render based on image dimensions
 
   const ciphertext = crypto.AES.encrypt(JSON.stringify(data), secret).toString();
 
-  const bytes  = crypto.AES.decrypt(ciphertext, secret);
-  const decryptedData = JSON.parse(bytes.toString(crypto.enc.Utf8));
-  console.log(ciphertext)
-  console.log(decryptedData)
-  fs.outputFile(`${container_name}.env`, string)
+  const string = `
+    CONTAINER=${container}
+    SUBDOMAIN=${subdomain}
+    PROMPT="${faker.hacker.phrase()}"
+    SECRET=${secret}
+    ICON_URI=${ciphertext}
+    `
+
+  // const bytes  = crypto.AES.decrypt(ciphertext, secret);
+  // const decryptedData = JSON.parse(bytes.toString(crypto.enc.Utf8));
+  fs.outputFile(`${container}`, promise.privateKey)
+  fs.outputFile(`${container}.pub`, promise.publicKey)
+  fs.outputFile(`${container}.rev`, promise.revocationCertificate)
+  fs.outputFile(`${container}.env`, string)
 
   // const hmacDigest = crypto.Base64.stringify(crypto.hmacSHA512(path + hashDigest, promise.privateKey));
 }
 
-const value = await Array(2).fill(0).map(environment_data)
-
-console.log(value)
+await Array(2).fill(0).map(environment_data)
 
