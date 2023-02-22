@@ -1,7 +1,0 @@
-Create a JSON version of snapshots
-
-```js
-await $`restic -r ${$.env.RESTIC_REPOSITORY} --password-command "pass show ${$.env.SUBDOMAIN}" snapshots --json > snapshots.json
-```
-
-

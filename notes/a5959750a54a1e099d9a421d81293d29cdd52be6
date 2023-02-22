@@ -1,9 +1,0 @@
-# Events 
-
-Events are scheduled according to the logic outlined in the episode of Tim Ferriss podcast.
-
-<Events start days />
-
-```js
-await $`calcurse -Q -d 01/01/2023 -d 15 --format-recur-event '  - %m\n  - %n\n---' | yq -s > events.json`
-```
