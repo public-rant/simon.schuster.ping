@@ -42,4 +42,6 @@ all: README.md
 	zx $?
 
 README.md: #bookmarks.html
-	calcurse -Q --format-todo "# %m\n\n\`\`\`js\n%N\n\`\`\`\n\n" | grep -v 'completed tasks\|to do' | sed -e 's/\t//g' > $@
+	calcurse -Q --from 01/01/2023 -d 2 --format-recur-event "\n\n\`\`\`js\n%N\n\`\`\`" > $@
+	calcurse -Q --format-todo "# %m\n\n\`\`\`js\n%N\n\`\`\`\n\n" | grep -v 'completed tasks\|to do' >> $@
+	sed -i -e 's/\t//g' $@
