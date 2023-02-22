@@ -1,4 +1,3 @@
-to do:
 README.md
 	# Richard Anthony
 	
