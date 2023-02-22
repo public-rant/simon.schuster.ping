@@ -1,0 +1,16 @@
+{
+  "name": "calcurse",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "crypto-js": "^4.1.1",
+    "openpgp": "^5.7.0"
+  }
+}
