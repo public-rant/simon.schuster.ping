@@ -1,23 +1,58 @@
-# About me
+to do:
+README.md
+$`	# Richard Anthony
+	
+	> faker.hacker.phrase()
 
-Here is what I am working on
+`
+bookmarks.html
+$`	# Bookmarks.html
+	
+	Render bookmarks
 
-```js
-$`cat Makefile`
-```
+`
+restic snapshots
+$`	# Read the snapshots from the repo
 
-The project can be bootstrapped with
+`
+events.json
+$`	# Events 
+	
+	Events are scheduled according to the logic outlined in the episode of Tim Ferriss podcast.
+	
+	<Events start days />
 
-```js
-$`make`
-```
+`
+passwords
+$`	# Passwords
+	
+	use password store to manage passwords
 
-You will need to generate some data first
+`
+restic backup
+$`	# Create a snapshot of the files
 
-```js
-await $`make generate`
+`
+todo.json
+$`	# TODO
+	
+	Export todo items for printing README.md
+	
+	Use priority to schedule build steps
 
-$`echo "Now would be a good time to run '`make`'"
-```
+`
+restic init
+$`	# Initialize a restic repo
 
+`
+todo
+$`	# The scaffold of a todo
+	
+	- faker.hacker.phrase()
+	- what.three.words
 
+`
+chrome extension
+$`	# Chrome extension
+
+`
