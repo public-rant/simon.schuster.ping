@@ -38,10 +38,22 @@ project ?= default
 include $(project).env
 export
 
-all: README.md
-	zx $?
+# all: README.md
+# 	zx $?
 
+ZX_LANG=js
+FILTER ?= 1 # FIXME
+
+HEADING = 'public-rant'
+
+SUBHEADING = 'releases'
+SED1 = 's/to do\:/hello/'
+SED2 = 's/01.02.23\:$$/test/'
+FORMAT_TODO=
+FORMAT_RECUR_EVENT=
+# calcurse -Q --from 01/01/2023 -d 2 --format-recur-event  > $@
+# calcurse -Q --format-todo  | grep -v 'completed tasks\|to do' >> $@
 README.md: #bookmarks.html
-	calcurse -Q --from 01/01/2023 -d 2 --format-recur-event "\n\n\`\`\`js\n%N\n\`\`\`" > $@
-	calcurse -Q --format-todo "# %m\n\n\`\`\`js\n%N\n\`\`\`\n\n" | grep -v 'completed tasks\|to do' >> $@
+	calcurse -Q --from 01/01/2023 --days 2 --format-todo "# %m\n\n\`\`\`$(ZX_LANG)\n%N\n\`\`\`\n\n" --format-recur-event "\n\n\`\`\`$(ZX_LANG)\n%N\n\`\`\`" | sed $(SED1) | sed $(SED2) > $@
 	sed -i -e 's/\t//g' $@
+	cat $@
