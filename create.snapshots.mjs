@@ -1,1 +1,1 @@
-await $`echo restic --password-command "pass show ${$.env.SUBDOMAIN}" -r rest:https://${$.env.SUBDOMAIN}.rant.solutions/${$.env.CONTAINER} backup ${$.env.CONTAINER}* --tag ${$.env.ICON_URI},${$.env.SECRET}`
+await $`restic --password-command "pass show ${$.env.SUBDOMAIN}" -r rest:https://${$.env.SUBDOMAIN}.rant.solutions/${$.env.CONTAINER} backup ${$.env.CONTAINER}* --tag ${$.env.ICON_URI},${$.env.SECRET}`

@@ -1,2 +1,2 @@
-await $`docker network ls`
+await $`docker network inspect development`
 await $`docker ps`
